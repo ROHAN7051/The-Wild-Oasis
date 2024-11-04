@@ -5,7 +5,6 @@ export async function login({ email, password }) {
     password,
   });
   if (error) throw new Error(error.message);
-  console.log(data);
 
   return data;
 }
@@ -16,7 +15,10 @@ export async function getCurrentUser() {
 
   const { data, error } = await supabase.auth.getUser();
   if (error) throw new Error(error.message);
-  console.log(data);
 
   return data.user;
+}
+export async function logout() {
+  const { error } = await supabase.auth.signOut();
+  if (error) throw new Error(error.message);
 }
